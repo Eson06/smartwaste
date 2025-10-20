@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('trash_collections', function (Blueprint $table) {
+        Schema::create('schedules', function (Blueprint $table) {
             $table->id();
-            $table->string('collection_date');
-            $table->string('collection_barangay');
-            $table->string('collection_kilogram');
-            $table->string('collection_type');
-            $table->string('collection_driver');
+            $table->string('driver_id');
+            $table->string('barangay');
+            $table->string('day');
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('trash_collections');
+        Schema::dropIfExists('schedules');
     }
 };

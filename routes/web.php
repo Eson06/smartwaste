@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Livewire\Admin\UserManagement;
 use App\Http\Controllers\AuthController;
 use App\Livewire\Admin\Dashboard as AdminDashboard;
+use App\Livewire\Admin\Driver;
 use App\Livewire\Admin\Report as AdminReport;
 use App\Livewire\Admin\Schedule;
 use App\Livewire\Admin\Setting as AdminSetting;
@@ -60,6 +61,7 @@ Route::middleware(['auth:web'],['revalidate'])->group(function() {
         Route::get('/schedule', Schedule::class)->name('schedule');
         Route::get('/report', AdminReport::class)->name('report');
         Route::get('/setting', AdminSetting::class)->name('setting');
+        Route::get('/driver', Driver::class)->name('driver');
     });
 
     #resident access only

@@ -1,25 +1,29 @@
 <div>
-    <div wire:ignore.self class="modal fade" id="collectionModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div wire:ignore.self class="modal fade" id="scheduleModal" tabindex="-1" role="dialog" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
         <div class="modal-dialog modal-md modal-dialog-centered" role="document">
 
-            <form class="modal-content" method="POST" wire:submit.prevent="storecollection">
+            <form class="modal-content" method="POST" wire:submit.prevent="ScheduleSave" enctype="multipart/form-data">
                 <div class="modal-header bg-primary text-white">
-                    <h5 class="modal-title">🗑️ Trash Collection Report</h5>
+                    <h5 class="modal-title">Driver Information</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
 
                 <div class="modal-body">
-                    <!-- Date Input -->
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Date of Collection</label>
-                        <input type="date" class="form-control" wire:model="collection_date" >
-                        @error('collection_date') <small class="text-danger">{{ $message }}</small> @enderror
+                        <label class="form-label fw-bold">Driver</label>
+                        <select wire:model="driver_id" class="form-select">
+                            <option value="">-- Select Driver --</option>
+                            @foreach ($drivers as $driver)
+                                <option value="{{ $driver->id }}">{{ $driver->name }}</option>
+                            @endforeach
+                        </select>
+                        @error('driver_id') <small class="text-danger">{{ $message }}</small> @enderror
                     </div>
 
-                    <!-- Barangay Input -->
+                    <!-- Barangay -->
                     <div class="mb-3">
                         <label class="form-label fw-semibold">Barangay</label>
-                        <select class="form-control" wire:model="collection_barangay" >
+                        <select class="form-control" wire:model="barangay" >
                             <option value="">-- Select Barangay --</option>
                             <option value="Balansay">Balansay</option>
                             <option value="Fatima (Tii)">Fatima (Tii)</option>
@@ -37,37 +41,31 @@
                             <option value="Tangkalan">Tangkalan</option>
                             <option value="Tayamaan">Tayamaan</option>
                         </select>
-                        @error('collection_barangay') 
+                        @error('barangay') 
                             <small class="text-danger">{{ $message }}</small> 
                         @enderror
                     </div>
-                    
 
-                    <!-- Kilogram Input -->
+                    <!-- Day -->
                     <div class="mb-3">
-                        <label class="form-label fw-semibold">Total Kilograms</label>
-                        <input type="number" class="form-control" placeholder="Enter weight in kg" wire:model="collection_kilogram" min="0" step="0.1" >
-                        @error('collection_kilogram') <small class="text-danger">{{ $message }}</small> @enderror
-                    </div>
-
-                    <!-- Type of Trash -->
-                    <div class="mb-3">
-                        <label class="form-label fw-semibold">Type of Trash</label>
-                        <select class="form-select" wire:model="collection_type" >
-                            <option value="">Select type</option>
-                            <option value="Biodegradable">Biodegradable</option>
-                            <option value="Non-Biodegradable">Non-Biodegradable</option>
-                            <option value="Recyclable">Recyclable</option>
-                            <option value="Residual">Residual</option>
-                            <option value="Hazardous">Hazardous</option>
+                        <label class="form-label fw-bold">Day</label>
+                        <select wire:model="day" class="form-select">
+                            <option value="">-- Select Day --</option>
+                            <option value="Monday">Monday</option>
+                            <option value="Tuesday">Tuesday</option>
+                            <option value="Wednesday">Wednesday</option>
+                            <option value="Thursday">Thursday</option>
+                            <option value="Friday">Friday</option>
+                            <option value="Saturday">Saturday</option>
+                            <option value="Sunday">Sunday</option>
                         </select>
-                        @error('collection_type') <small class="text-danger">{{ $message }}</small> @enderror
-                    </div>
+                        @error('day') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>  
                 </div>
 
                 <div class="modal-footer">
                     <div class="w-100">
-                        <div class="row">
+                        <div class="row g-2">
                             <div class="col-6">
                                 <button type="button" class="btn btn-secondary w-100" data-bs-dismiss="modal">
                                     Cancel
