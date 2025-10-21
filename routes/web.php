@@ -46,7 +46,13 @@ Route::middleware('guest:web')->group(function(){
         return view('back.pages.auth.login');
     })->name('login');
 
+    Route::get('/resident', function () {
+        return view('livewire.register.resident');
+    })->name('resident');
+
     Route::post('/custom-login', [AuthController::class,'customLogin'])->name('custom.login');
+
+    Route::post('/register-resident', [AuthController::class, 'store'])->name('resident.store');
 });
 
 

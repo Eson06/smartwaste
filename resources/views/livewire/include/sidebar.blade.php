@@ -312,7 +312,7 @@
   </a>
 </li>
 
-<li class="nav-item {{ Route::is('driver.report') ? 'active' : '' }}">
+{{-- <li class="nav-item {{ Route::is('driver.report') ? 'active' : '' }}">
   <a  href="{{ route('driver.report')}}" class="nav-link "  wire:navigate >
       <span class="nav-link-icon d-md-none d-lg-inline-block">
           <svg class="icon icon-tabler icon-tabler-users-group" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
@@ -329,7 +329,7 @@
       Report
   </span>
   </a>
-</li>
+</li> --}}
 
 <li class="nav-item {{ Route::is('driver.setting') ? 'active' : '' }}">
   <a  href="{{ route('driver.setting')}}" class="nav-link "  wire:navigate >

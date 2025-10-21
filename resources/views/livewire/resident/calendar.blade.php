@@ -6,11 +6,6 @@
         <li class="breadcrumb-item active text-muted" aria-current="page">Calendar</li>
     </ol>
 
-    <div class="container my-5">
-      <div class="card shadow-lg border-0 rounded-4">
-          <div class="card-header bg-primary text-white text-center fw-bold fs-5">
-              🚘 Driver Weekly Schedule
-          </div>
   
           <div class="container my-5">
             <div class="card shadow-lg border-0 rounded-4">
@@ -68,6 +63,3 @@
             </div>
         </div>
         
-  
-
-</div>
