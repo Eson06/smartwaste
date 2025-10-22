@@ -38,6 +38,11 @@ class Collection extends Component
 
     public function render()
     {
-        return view('livewire.driver.collection');
+        $trashs = trash_collection::where('collection_driver', auth('web')->user()->id)
+            ->latest()
+            ->get();
+        return view('livewire.driver.collection', [
+            'trashs' => $trashs,
+        ]);
     }
 }

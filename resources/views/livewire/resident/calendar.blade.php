@@ -29,33 +29,42 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($schdecules->groupBy('barangay') as $barangay => $barangayschdecules)
-                                    <tr>
-                                        <td class="fw-semibold text-start">{{ $barangay }}</td>
-        
-                                        @foreach (['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'] as $day)
-                                            @php
-                                                // Filter schdecules for this barangay and day
-                                                $dayschdecules = $barangayschdecules->where('day', $day);
-                                            @endphp
-        
-                                            <td>
-                                                @if ($dayschdecules->count() > 0)
-                                                    @foreach ($dayschdecules as $schedule)
-                                                        <div class="mb-2">
-                                                            <span class="fw-semibold text-success">
-                                                                {{ $schedule->driver->name }}
-                                                            </span><br>
-                                                            <span class="badge bg-success">With Pickup</span>
-                                                        </div>
-                                                    @endforeach
-                                                @else
-                                                    <span class="badge bg-danger">No Pickup</span>
-                                                @endif
-                                            </td>
-                                        @endforeach
-                                    </tr>
-                                @endforeach
+                                @if ($schdecules->count() > 0)
+    @foreach ($schdecules->groupBy('barangay') as $barangay => $barangayschdecules)
+        <tr>
+            <td class="fw-semibold text-start">{{ $barangay }}</td>
+
+            @foreach (['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'] as $day)
+                @php
+                    // Filter schedules for this barangay and day
+                    $dayschdecules = $barangayschdecules->where('day', $day);
+                @endphp
+
+                <td>
+                    @if ($dayschdecules->count() > 0)
+                        @foreach ($dayschdecules as $schedule)
+                            <div class="mb-2">
+                                <span class="fw-semibold text-success">
+                                    {{ $schedule->driver->name }}
+                                </span><br>
+                                <span class="badge bg-success">With Pickup</span>
+                            </div>
+                        @endforeach
+                    @else
+                        <span class="badge bg-danger">No Pickup</span>
+                    @endif
+                </td>
+            @endforeach
+        </tr>
+    @endforeach
+@else
+    <tr>
+        <td colspan="8" class="text-center text-muted fw-semibold py-3">
+            🚫 No Collection Schedule Available
+        </td>
+    </tr>
+@endif
+
                             </tbody>
                         </table>
                     </div>

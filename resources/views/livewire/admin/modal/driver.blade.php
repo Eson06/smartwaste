@@ -9,6 +9,9 @@
                 </div>
 
                 <div class="modal-body">
+                    <!-- Personal Info -->
+
+                    <h6 class="fw-bold text-primary mb-3"><i class="fas fa-user-lock me-1"></i> Personal Info</h6>
                     <div class="form-group mb-3">
                         <label for="name" class="form-label fw-bold">Full Name</label>
                         <input type="text" wire:model="name" id="name" class="form-control" placeholder="Enter full name">
@@ -48,7 +51,25 @@
                     <div class="form-group mb-3">
                         <label for="photo" class="form-label fw-bold">Photo</label>
                         <input type="file" wire:model="photo" id="photo" class="form-control">
-                          </div>
+                        @error('photo') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+
+                    <hr>
+
+                    <!-- Login Credentials -->
+                    <h6 class="fw-bold text-primary mb-3"><i class="fas fa-user-lock me-1"></i> Login Credentials</h6>
+
+                    <div class="form-group mb-3">
+                        <label for="user_name" class="form-label fw-bold">Username</label>
+                        <input type="text" wire:model="user_name" id="user_name" class="form-control" placeholder="Enter username">
+                        @error('user_name') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
+
+                    <div class="form-group mb-3">
+                        <label for="password" class="form-label fw-bold">Password</label>
+                        <input type="password" wire:model="password" id="password" class="form-control" placeholder="Enter password">
+                        @error('password') <small class="text-danger">{{ $message }}</small> @enderror
+                    </div>
                 </div>
 
                 <div class="modal-footer">

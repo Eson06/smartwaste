@@ -9,51 +9,43 @@
     <div class="row">
         <div class="container my-4">
             <h4 class="mb-3 text-primary fw-bold">📋 Report Status</h4>
-          
             <div class="table-responsive">
-                <div class="card-body">
-                    <div class="table-responsive">
-                      <table class="table table-hover align-middle text-center">
-                        <thead class="table-primary">
+              <table class="table table-bordered table-hover text-center align-middle">
+                  <thead class="thead-dark">
+                      <tr>
+                          <th>Name</th>
+                          <th>Date</th>
+                          <th>Title</th>
+                          <th>Message</th>
+                          <th>Attachment</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      @forelse ($reports as $report)
                           <tr>
-                            <th>ID</th>
-                            <th>Date</th>
-                            <th>Title</th>
-                            <th>Message</th>
-                            <th>Status</th>
-                            <th>Action</th>
+                              <td>{{ $report->user->name }}</td>
+                              <td>{{ $report->date }}</td>
+                              <td>{{ $report->title }}</td>
+                              <td>{{ $report->message }}</td>
+                              <td>
+                                  @if ($report->attachment)
+                                      <a href="{{ asset('storage/' . $report->attachment) }}" target="_blank" class="btn btn-sm btn-primary">View</a>
+                                  @else
+                                      <span class="badge bg-secondary">No Attachment</span>
+                                  @endif
+                              </td>
                           </tr>
-                        </thead>
-                        <tbody>
+                      @empty
                           <tr>
-                            <td>1</td>
-                            <td>2025-10-15</td>
-                            <td>Garbage Overflow</td>
-                            <td>Overflowing bins in Zone A need immediate attention.</td>
-                            <td><span class="badge bg-warning text-dark">Pending</span></td>
-                            <td><button class="btn btn-sm btn-outline-primary">View</button></td>
+                              <td colspan="5" class="text-center text-muted fw-semibold py-3">
+                                  🚫 No Reports Found
+                              </td>
                           </tr>
-                          <tr>
-                            <td>2</td>
-                            <td>2025-10-14</td>
-                            <td>Schedule Missed</td>
-                            <td>Collection truck did not arrive on schedule.</td>
-                            <td><span class="badge bg-success">Resolved</span></td>
-                            <td><button class="btn btn-sm btn-outline-primary">View</button></td>
-                          </tr>
-                          <tr>
-                            <td>3</td>
-                            <td>2025-10-13</td>
-                            <td>Damaged Bin</td>
-                            <td>Bin #12 at Park Area needs replacement.</td>
-                            <td><span class="badge bg-danger">Rejected</span></td>
-                            <td><button class="btn btn-sm btn-outline-primary">View</button></td>
-                          </tr>
-                        </tbody>
-                      </table>
-                    </div>
-                  </div>
-            </div>
+                      @endforelse
+                  </tbody>
+              </table>
+          </div>
+          
           </div>
           
     </div>

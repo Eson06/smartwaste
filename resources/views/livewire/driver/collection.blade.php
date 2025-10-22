@@ -21,14 +21,17 @@
     </div>
 
     <div class="container my-5">
-        <div class="card shadow-lg border-0 rounded-4">
-            <div class="card-header bg-primary text-white text-center fw-bold fs-5">
-                🗑️ Trash Collection Summary
+        <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+            <div class="card-header bg-gradient bg-primary text-white text-center py-3">
+                <h5 class="mb-0 fw-semibold">
+                    <i class="bi bi-trash3-fill me-2"></i> Trash Collection Summary
+                </h5>
             </div>
-            <div class="card-body">
+    
+            <div class="card-body bg-light">
                 <div class="table-responsive">
-                    <table class="table table-bordered align-middle text-center table-hover">
-                        <thead class="table-primary">
+                    <table class="table table-hover align-middle text-center mb-0 shadow-sm bg-white rounded">
+                        <thead class="table-primary text-uppercase small">
                             <tr>
                                 <th>Date</th>
                                 <th>Barangay</th>
@@ -37,36 +40,33 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>2025-10-14</td>
-                                <td>Barangay San Isidro</td>
-                                <td>120</td>
-                                <td><span class="badge bg-success">Biodegradable</span></td>
-                            </tr>
-                            <tr>
-                                <td>2025-10-15</td>
-                                <td>Barangay Malinis</td>
-                                <td>80</td>
-                                <td><span class="badge bg-warning text-dark">Recyclable</span></td>
-                            </tr>
-                            <tr>
-                                <td>2025-10-16</td>
-                                <td>Barangay Mabini</td>
-                                <td>150</td>
-                                <td><span class="badge bg-danger">Non-Biodegradable</span></td>
-                            </tr>
-                            <tr>
-                                <td>2025-10-17</td>
-                                <td>Barangay Bagong Silang</td>
-                                <td>65</td>
-                                <td><span class="badge bg-secondary">Residual</span></td>
-                            </tr>
-                            <tr>
-                                <td>2025-10-18</td>
-                                <td>Barangay Sta. Lucia</td>
-                                <td>25</td>
-                                <td><span class="badge bg-dark">Hazardous</span></td>
-                            </tr>
+                            @forelse ($trashs as $collection)
+                                @php
+                                    // Assign color based on trash type
+                                    $badgeClass = match($collection->collection_type) {
+                                        'Biodegradable' => 'bg-success',
+                                        'Non-Biodegradable' => 'bg-secondary',
+                                        'Recyclable' => 'bg-info text-dark',
+                                        'Residual' => 'bg-warning text-dark',
+                                        'Hazardous' => 'bg-danger',
+                                        default => 'bg-dark'
+                                    };
+                                @endphp
+                                <tr>
+                                    <td class="fw-semibold">{{ $collection->collection_date }}</td>
+                                    <td>{{ $collection->collection_barangay }}</td>
+                                    <td>{{ $collection->collection_kilogram }} kg</td>
+                                    <td>
+                                        <span class="badge {{ $badgeClass }} px-3 py-2">
+                                            {{ $collection->collection_type }}
+                                        </span>
+                                    </td>
+                                </tr>
+                            @empty
+                                <tr>
+                                    <td colspan="4" class="text-muted py-4">No data available</td>
+                                </tr>
+                            @endforelse
                         </tbody>
                     </table>
                 </div>
@@ -74,6 +74,7 @@
         </div>
     </div>
     
-
+    
+    
     @include('livewire.driver.modal.collection')
 </div>

@@ -42,16 +42,17 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @if ($drivers->count() > 0)
                         @foreach ($drivers as $driver)
                             <tr>
                                 <td class="fw-semibold text-start">{{ $driver->name }}</td>
-
+                    
                                 @foreach (['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday','Sunday'] as $day)
                                     @php
                                         // Get all barangays for this driver on the given day
                                         $daySchedules = $driver->schedules->where('day', $day);
                                     @endphp
-
+                    
                                     <td>
                                         @if ($daySchedules->count() > 0)
                                             @foreach ($daySchedules as $schedule)
@@ -64,6 +65,14 @@
                                 @endforeach
                             </tr>
                         @endforeach
+                    @else
+                        <tr>
+                            <td colspan="8" class="text-center text-muted fw-semibold py-3">
+                                🚫 No Collection Schedule Available
+                            </td>
+                        </tr>
+                    @endif
+                    
                     </tbody>
                 </table>
             </div>

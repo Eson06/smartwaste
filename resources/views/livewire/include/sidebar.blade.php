@@ -29,7 +29,7 @@
         <ul class="navbar-nav pt-lg-3">
 
             <li class="nav-item {{ Route::is('dashboard') ? 'active' : '' }}">
-                <a class="nav-link" href="{{ route('dashboard')}}" wire:navigate >
+                <a class="nav-link" href="{{ route('dashboard')}}" >
                     <span class="nav-link-icon d-md-none d-lg-inline-block">
                         <svg class="icon icon-tabler icon-tabler-layout-dashboard" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
                             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>

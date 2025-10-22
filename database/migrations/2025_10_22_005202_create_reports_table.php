@@ -11,26 +11,22 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('drivers', function (Blueprint $table) {
+        Schema::create('reports', function (Blueprint $table) {
             $table->id();
             $table->string('user_id');
-            $table->string('name');
-            $table->date('birthdate');
-            $table->string('address');
-            $table->string('contact_number')->nullable();
-            $table->string('license_number')->unique();
-            $table->date('license_expiration')->nullable();
-            $table->string('photo')->nullable();
+            $table->string('date');
+            $table->string('title');
+            $table->string('message');
+            $table->string('attachment')->nullable();
             $table->timestamps();
         });
     }
-    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::dropIfExists('drivers');
+        Schema::dropIfExists('reports');
     }
 };
